@@ -16,7 +16,7 @@ pipeline {
             steps {
                 withSonarQubeEnv(installationName: 'sonarserver') { // 'sonarserver' is the name you configured
                 sh """
-                    /opt/sonar-scanner/bin/sonar-scanner \
+                    mvn sonar:sonar \
                         -Dsonar.projectKey=demo-check \
                         -Dsonar.projectName='SonarQube Jenkins Demo' \
                         -Dsonar.projectVersion=1.0 \
