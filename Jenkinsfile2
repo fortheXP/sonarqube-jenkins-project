@@ -14,7 +14,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('sonarserver') { // 'sonarserver' is the name you configured
+                withSonarQubeEnv(installationName: 'sonarserver') { // 'sonarserver' is the name you configured
                 sh """
                     /opt/sonar-scanner/bin/sonar-scanner \
                         -Dsonar.projectKey=demo-check \
