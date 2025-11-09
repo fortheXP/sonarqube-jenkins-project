@@ -8,21 +8,21 @@ pipeline {
     stages {
         stage('Code Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Venkiemc/sonarqube-jenkins-project.git'
+                git branch: 'main', url: 'https://github.com/forthexp/sonarqube-jenkins-project.git'
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonarserver') { // 'sonarserver' is the name you configured
-                    bat """
-                        "C:\\Program Files\\sonar-scanner\\bin\\sonar-scanner.bat" ^
-                        -Dsonar.projectKey=demo-check ^
-                        -Dsonar.projectName="SonarQube Jenkins Demo" ^
-                        -Dsonar.projectVersion=1.0 ^
-                        -Dsonar.sources=src/main/java ^
-                        -Dsonar.login=%SONAR_TOKEN%
-                    """
+                sh """
+                    /opt/sonar-scanner/bin/sonar-scanner \
+                        -Dsonar.projectKey=demo-check \
+                        -Dsonar.projectName='SonarQube Jenkins Demo' \
+                        -Dsonar.projectVersion=1.0 \
+                        -Dsonar.sources=src/main/java \
+                        -Dsonar.login=$SONAR_TOKEN
+                """
                 }
             }
         }
